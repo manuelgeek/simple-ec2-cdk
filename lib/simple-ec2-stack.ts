@@ -4,6 +4,7 @@ import * as cdk from '@aws-cdk/core'
 import * as ec2 from '@aws-cdk/aws-ec2' // import ec2 library
 import * as iam from '@aws-cdk/aws-iam' // import iam library for permissions
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as fs from 'fs'
 
 require('dotenv').config()
 
@@ -86,6 +87,12 @@ export class SimpleEc2Stack extends cdk.Stack {
 
       keyName: 'simple-instance-1-key', // we will create this in the console before we deploy
     })
+
+    // add user script to instance
+    // this script runs when the instance is started
+    instance.addUserData(
+      fs.readFileSync('lib/user_script.sh', 'utf8')
+    )
 
     // cdk lets us output properties of the resources we create after they are created
     // we want the ip address of this new instance, so we can ssh into it later
