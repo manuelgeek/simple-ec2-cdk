@@ -5,6 +5,7 @@ import { SimpleEc2Stack } from '../lib/simple-ec2-stack';
 
 const app = new cdk.App();
 new SimpleEc2Stack(app, 'SimpleEc2Stack', {
+  description: 'This is a simple EC2 stack'
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
